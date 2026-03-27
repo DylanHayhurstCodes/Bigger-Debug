@@ -1,0 +1,25 @@
+name: Bigger-Debug Pipeline
+on: [push, pull_request]
+
+jobs:
+  engine-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile C++ Engine
+        # This looks into your 'engine' folder
+        run: g++ engine/core.cpp -o bigger_debug_engine
+
+  interface-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check TypeScript Syntax
+        # This checks your 'interface' folder for TS errors
+        run: |
+          cd interface
+          npm install -g typescript
+          tsc app.ts --noEmit
