@@ -1,0 +1,10 @@
+# Compiled C++ files
+*.exe
+*.o
+*.out
+bigger_compiler
+zenith_engine
+
+# Node.js / TypeScript junk
+node_modules/
+dist/
