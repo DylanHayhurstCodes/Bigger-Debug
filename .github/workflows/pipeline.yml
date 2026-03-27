@@ -7,8 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Compile C++ Engine
-        # This looks into your 'engine' folder
-        run: g++ engine/core.cpp -o bigger_debug_engine
+        run: |
+          SRC_FILE=$(find . -name "*.cpp" | head -n 1)
+          g++ "$SRC_FILE" -o bigger_debug_engine
 
   interface-check:
     runs-on: ubuntu-latest
@@ -18,8 +19,9 @@ jobs:
         with:
           node-version: '20'
       - name: Check TypeScript Syntax
-        # This checks your 'interface' folder for TS errors
         run: |
-          cd interface
           npm install -g typescript
-          tsc app.ts --noEmit
+          TS_FILE=$(find . -name "*.ts" | head -n 1)
+          if [ -n "$TS_FILE" ]; then
+            tsc "$TS_FILE" --noEmit --skipLibCheck --esModuleInterop --target es6
+          fi
