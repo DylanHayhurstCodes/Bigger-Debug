@@ -1,0 +1,13 @@
+{
+  "name": "bigger-debug-interface",
+  "version": "1.0.0",
+  "description": "TypeScript Frontend for Bigger-Debug",
+  "main": "app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node app.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
